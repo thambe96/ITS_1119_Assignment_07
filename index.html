@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mini-pos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+<body>
+
+<section class="navigation">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+<!--            <h6>Cakeology POS System</h6>-->
+            <a class="navbar-brand custom-navbar-brand" href="#" style="color: darkblue; font-weight: bold">Cakeology POS System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse custom-navbar" id="navbarNav">
+                <ul class="navbar-nav custom-navbar-nav">
+                    <li id="nav-home" class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li id="nav-customer" class="nav-item">
+                        <a class="nav-link" href="#">Customer</a>
+                    </li>
+                    <li id="nav-items" class="nav-item">
+                        <a class="nav-link" href="#">Item</a>
+                    </li>
+                    <li id="nav-orders" class="nav-item">
+                        <a class="nav-link" href="#">Orders</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</section>
+
+
+<section id="home">
+
+    <div class="container custom-customer-container my-5">
+
+        <div class="row">
+            <div class="col g-0">
+                <div style="background: cornflowerblue; color: white; padding: 10px; font-weight: bold; text-align: center">This is Home</div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dignissimos exercitationem minima quo. Adipisci amet aut consectetur maxime nam nesciunt odit possimus tempora! Corporis deserunt illum magni quidem veniam vitae.</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam distinctio eaque eum id illo, minima necessitatibus nisi nobis, nostrum praesentium provident quasi reiciendis rem sint veritatis voluptatum. Exercitationem, neque.</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda beatae consequatur, culpa distinctio dolore dolores expedita hic id impedit ipsam iure maiores, mollitia nisi non pariatur sed, tempore ullam voluptas.</div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+</section>
+
+
+
+
+<section id="customer">
+
+    <div class="container custom-customer-container my-5" style="min-height: 20vh">
+        <div class="row mb-5" >
+
+            <div class="col-12 g-0" > <!--in here use (g-0) to remove left and right spaces of column with the container-->
+                <div style="background: cornflowerblue; color: whitesmoke; text-align: center; padding: 1rem; font-weight: bold">Customer</div>
+            </div>
+
+        </div>
+
+
+        <div class="row mb-5 gy-3">
+
+            <div class="col" style="border: 2px solid purple">
+                <input id="customer_search_field" type="text" class="form-control" placeholder="Customer Name/ID" aria-label="First name">
+            </div>
+
+
+            <div class="col-md-2" style="border: 2px solid red">
+                <select id="customer_search_type" class="form-select" aria-label="Default select example">
+                    <option selected>Name</option>
+                    <option value="1">ID</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="row mb-5 gy-3 justify-content-center">
+
+            <!--using d-flex utility class here to align items-->
+            <div class="col-sm col-md-auto d-flex justify-content-center" style="border: 2px solid red">
+                <!-- data-bs-toggle="modal" data-bs-target="#update_customer_form_search" -->
+
+                <div>
+                    <button id="customer_search_btn" type="button" class="btn btn-primary" >Search</button>
+                </div>
+
+
+                <div id="update_customer_form_search" class="modal custom_search_customer_modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Customer</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!--                                <p>Modal body text goes here.</p>-->
+
+                                <div class="mb-3">
+                                    <label for="cust_id_search" class="form-label">Customer ID</label>
+                                    <input type="text" readonly class="form-control" id="cust_id_search" placeholder="ID">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cust_name_search" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="cust_name_search" placeholder="Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="cust_salary_search" class="form-label">Salary</label>
+                                    <input type="number" class="form-control" id="cust_salary_search" placeholder="50000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cust_address_search" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="cust_address_search" placeholder="Kaluthara">
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="update_search_close_btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button id="update_customer_btn_search" type="button" class="btn btn-primary">Save changes</button>
+                                <button id="delete_customer_btn_search" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+<!--
+
+            <div class="col-2 ">
+
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#edit-customer-form">Edit Customer</button>
+
+                <div id="edit-customer-form" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Customer Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Modal body text goes here.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            -->
+
+            <div class="col-sm col-md-auto d-flex justify-content-center" style="border: 2px solid red">
+
+                <button id="add_customer" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-customer-form">Add Customer</button>
+
+
+                <div id="add-customer-form" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Customer Registration</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+<!--                                <p>Modal body text goes here.</p>-->
+
+                                <div class="mb-3">
+                                    <label for="cust_id" class="form-label">Customer ID</label>
+                                    <input type="text" readonly class="form-control" id="cust_id" placeholder="ID">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cust_name" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="cust_name" placeholder="Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="cust_salary" class="form-label">Salary</label>
+                                    <input type="number" class="form-control" id="cust_salary" placeholder="50000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cust_address" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="cust_address" placeholder="Kaluthara">
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button id="save_customer" type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-10">
+
+              <div class="table-responsive-lg">
+                    <table class="table table-info table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Customer ID</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col">Address</th>
+                        </tr>
+                        </thead>
+                        <tbody id="customer-tbody">
+                        <!--
+
+                               <tr>
+                                   <th scope="row">1</th>
+                                   <td>Mark</td>
+                                   <td>Otto</td>
+                                   <td>@mdo</td>
+                               </tr>
+                               <tr>
+                                   <th scope="row">2</th>
+                                   <td>Jacob</td>
+                                   <td>Thornton</td>
+                                   <td>@fat</td>
+                               </tr>
+                               <tr>
+                                   <th scope="row">3</th>
+                                   <td>John</td>
+                                   <td>Doe</td>
+                                   <td>@social</td>
+                               </tr>
+
+                               -->
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+<!-- ---------------------------------------------- From here the Item Section ----------------------------------------------------- -->
+
+
+
+
+<section id="item">
+
+    <div class="container custom-customer-container my-5" style="min-height: 20vh">
+        <div class="row mb-5" >
+
+            <div class="col-12 g-0" > <!--in here use (g-0) to remove left and right spaces of column with the container-->
+                <div style="background: cornflowerblue; color: whitesmoke; text-align: center; padding: 1rem; font-weight: bold">Item</div>
+            </div>
+
+        </div>
+
+
+        <div class="row mb-5 gy-3">
+
+            <div class="col" style="border: 2px solid purple">
+                <input id="item_search_field" type="text" class="form-control" placeholder="Item Name/ID" aria-label="First name">
+            </div>
+
+
+            <div class="col-md-2" style="border: 2px solid red">
+                <select id="item_search_type" class="form-select" aria-label="Default select example">
+                    <option selected>Name</option>
+                    <option value="1">ID</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="row mb-5 gy-3 justify-content-center">
+
+            <!--using d-flex utility class here to align items-->
+            <div class="col-sm col-md-auto d-flex justify-content-center" style="border: 2px solid red">
+                <!-- data-bs-toggle="modal" data-bs-target="#update_customer_form_search" -->
+
+                <div>
+                    <button id="item_search_btn" type="button" class="btn btn-warning" >Search</button>
+                </div>
+
+
+                <div id="update_item_form_search" class="modal custom_search_customer_modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Item</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!--                                <p>Modal body text goes here.</p>-->
+
+                                <div class="mb-3">
+                                    <label for="item_id_search" class="form-label">Item ID</label>
+                                    <input type="text" readonly class="form-control" id="item_id_search" placeholder="ID">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="item_name_search" class="form-label">Item Name</label>
+                                    <input type="text" class="form-control" id="item_name_search" placeholder="Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="item_price_search" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="item_price_search" placeholder="50000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="item_quantity_search" class="form-label">Quantity</label>
+                                    <input type="number" class="form-control" id="item_quantity_search" placeholder="2">
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="update_item_search_close_btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button id="update_item_btn_search" type="button" class="btn btn-primary">Save changes</button>
+                                <button id="delete_item_btn_search" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <!--
+
+                        <div class="col-2 ">
+
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#edit-customer-form">Edit Customer</button>
+
+                            <div id="edit-customer-form" class="modal" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Customer Details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Modal body text goes here.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        -->
+
+            <div class="col-sm col-md-auto d-flex justify-content-center" style="border: 2px solid red">
+
+                <button id="add_item" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-item-form">Add Item</button>
+
+
+                <div id="add-item-form" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Item Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!--                                <p>Modal body text goes here.</p>-->
+
+                                <div class="mb-3">
+                                    <label for="item_id" class="form-label">Item ID</label>
+                                    <input type="text" readonly class="form-control" id="item_id" placeholder="ID">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="item_name" class="form-label">Item Name</label>
+                                    <input type="text" class="form-control" id="item_name" placeholder="Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="item_price" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="item_price" placeholder="50000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="item_qty" class="form-label">Qty</label>
+                                    <input type="number" class="form-control" id="item_qty" placeholder="2">
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button id="save_item" type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-10">
+
+                <div class="table-responsive-lg">
+                    <table class="table table-info table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Item ID</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody id="item-tbody">
+                        <!--
+
+                               <tr>
+                                   <th scope="row">1</th>
+                                   <td>Mark</td>
+                                   <td>Otto</td>
+                                   <td>@mdo</td>
+                               </tr>
+                               <tr>
+                                   <th scope="row">2</th>
+                                   <td>Jacob</td>
+                                   <td>Thornton</td>
+                                   <td>@fat</td>
+                               </tr>
+                               <tr>
+                                   <th scope="row">3</th>
+                                   <td>John</td>
+                                   <td>Doe</td>
+                                   <td>@social</td>
+                               </tr>
+
+                               -->
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+</section>
+
+
+
+
+<!-- Orders Section  -->
+
+
+
+<section id="orders">
+
+    <div class="container custom-customer-container">
+
+
+        <div class="row mb-4">
+            <div class="col gx-0">
+                <div style="color: white; background: cornflowerblue; padding: 10px; text-align: center;font-weight: bold">Order Placement</div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <form>
+
+                    <div class="mb-3">
+                        <label for="order-id" class="form-label">Order ID</label>
+                        <input type="text" id="order-id" readonly class="form-control" placeholder="O-001">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="order-date"  class="form-label">Date</label>
+                        <input type="text" id="order-date" readonly class="form-control">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="customer-id-select"  class="form-label">Customer ID</label>
+                        <select  id="customer-id-select"  class="form-select">
+                          <!--
+                            <option selected>One</option>
+                            <option>Two</option>
+                            -->
+                        </select>
+                    </div>
+
+                </form>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row mb-4">
+
+
+            <div class="col mb-3 d-flex justify-content-end">
+                <div>
+                    <button id="select_item_btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#select-item-form">Select Item</button>
+                </div>
+
+
+
+            </div>
+
+            <div id="select-item-form" class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Item Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!--                                <p>Modal body text goes here.</p>-->
+
+                            <div class="mb-3">
+                                <label for="select_item_id" class="form-label">Item ID</label>
+                                <select id="select_item_id" class="form-select"  placeholder="ID">
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="item_desc" class="form-label">Description</label>
+                                <input type="text" readonly class="form-control " id="item_desc" placeholder="Name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="unit_price" class="form-label">Unit Price</label>
+                                <input type="number" readonly class="form-control" id="unit_price" placeholder="500.00">
+                            </div>
+                            <div class="mb-3">
+                                <label for="qty_on_hand" class="form-label">qty on hand</label>
+                                <input type="number" readonly class="form-control " id="qty_on_hand" placeholder="2">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="qty_on_hand_select" class="form-label">Input Qty</label>
+                                <input type="number" class="form-control " id="qty_on_hand_select" placeholder="2">
+                            </div>
+
+
+
+
+                            <div class="mb-3 d-flex justify-content-end" >
+                                <button id="add_to_cart" type="button" class="btn btn-secondary btn-sm">Add to Cart</button>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="mb-3">
+
+
+                                <div class="table-responsive-lg">
+                                    <table class="table table-info table-hover ">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Order ID</th>
+                                            <th scope="col">Item Id</th>
+                                            <th scope="col">Item Name</th>
+                                            <th scope="col">Qty</th>
+                                            <th scope="col">Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="order_cart_tbody">
+                                        <!--
+
+                                               <tr>
+                                                   <th scope="row">1</th>
+                                                   <td>Mark</td>
+                                                   <td>Otto</td>
+                                                   <td>@mdo</td>
+                                               </tr>
+                                               <tr>
+                                                   <th scope="row">2</th>
+                                                   <td>Jacob</td>
+                                                   <td>Thornton</td>
+                                                   <td>@fat</td>
+                                               </tr>
+                                               <tr>
+                                                   <th scope="row">3</th>
+                                                   <td>John</td>
+                                                   <td>Doe</td>
+                                                   <td>@social</td>
+                                               </tr>
+
+                                               -->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+
+                                
+
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="total" class="form-label">Total</label>
+                                <div class="input-group">
+                                    <div class="input-group-text">Rs</div>
+                                    <input id="total" type="number" readonly class="form-control">
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="save_order" type="button" class="btn btn-primary">Save Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="table-responsive-lg">
+            <table class="table table-info table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody id="order-tbody">
+                <!--
+
+                       <tr>
+                           <th scope="row">1</th>
+                           <td>Mark</td>
+                           <td>Otto</td>
+                           <td>@mdo</td>
+                       </tr>
+                       <tr>
+                           <th scope="row">2</th>
+                           <td>Jacob</td>
+                           <td>Thornton</td>
+                           <td>@fat</td>
+                       </tr>
+                       <tr>
+                           <th scope="row">3</th>
+                           <td>John</td>
+                           <td>Doe</td>
+                           <td>@social</td>
+                       </tr>
+
+                       -->
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/lib/jQuery/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="controller/CustomerController.js"></script>
+<script type="module" src="controller/ItemController.js"></script>
+<script type="module" src="controller/OrderController.js"></script>
+
+<script>
+
+
+    $("#customer").css("display", "none");
+    $("#item").css("display", "none");
+    $("#orders").css("display", "none");
+
+
+    $("#nav-home").on('click', function () {
+
+        $("#customer").css("display", "none");
+        $("#items").css("display", "none");
+        $("#orders").css("display", "none");
+        $("#home").css("display", "block");
+
+    });
+
+    $("#nav-customer").on('click', function () {
+
+        $("#customer").css("display", "block");
+        $("#item").css("display", "none");
+        $("#orders").css("display", "none");
+        $("#home").css("display", "none");
+
+
+    });
+
+    $("#nav-items").on('click', function () {
+
+        $("#customer").css("display", "none");
+        $("#item").css("display", "block");
+        $("#orders").css("display", "none");
+        $("#home").css("display", "none");
+
+    });
+
+    $("#nav-orders").on('click', function () {
+
+        $("#customer").css("display", "none");
+        $("#item").css("display", "none");
+        $("#orders").css("display", "block");
+        $("#home").css("display", "none");
+
+    });
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

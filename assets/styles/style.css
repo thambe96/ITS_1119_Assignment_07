@@ -1,0 +1,16 @@
+
+.custom-customer-container {
+    background: aliceblue;
+    /*border: 5px solid red;*/
+}
+
+.custom-navbar {
+    /*background: red;*/
+    justify-content: end;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.custom_search_customer_modal {
+    background-color: rgba(0,0,0,0.5);
+}
