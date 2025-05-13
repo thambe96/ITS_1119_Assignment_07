@@ -117,6 +117,9 @@ function loadItemIds() {
 
     $('#select_item_id').empty();
 
+    let optionLabel = `<option>---- Select Item ID ---</option>>`
+    $('#select_item_id').append(optionLabel);
+
     item_db.forEach((item) => {
 
 
@@ -184,6 +187,12 @@ $('#select_item_id').change(function() {
     });
 
 
+    if (selectedText === "---- Select Item ID ---") {
+        clearItemDetailsForm();
+    }
+
+
+
 });
 
 
@@ -196,6 +205,13 @@ $('#add_to_cart').on('click', function () {
     let itemName = $('#item_desc').val();
     let itemQty = $('#qty_on_hand_select').val();
     let price = parseFloat($('#unit_price').val())  * parseInt($('#qty_on_hand_select').val());
+
+
+    if (!formValidationItemDetails()) {
+        return;
+    }
+
+
 
     if (itemQty > parseInt($('#qty_on_hand').val())) {
         alert("Not enough qty on hand");
@@ -245,9 +261,14 @@ $('#add_to_cart').on('click', function () {
 
     updateItemDbQty(cartData);
 
+    let total = calculateTotal();
+
+    console.log(`Total --> : ${total}`)
 
 
 
+    $('#total').val(total);
+    clearItemDetailsForm();
 
 });
 
@@ -290,3 +311,60 @@ function updateItemDbQty(cartData) {
 }
 
 
+function calculateTotal() {
+    let total = 0;
+    cartArray.forEach(function (cartItem){
+        total+= parseInt(cartItem.price) ;
+    });
+    return total;
+}
+
+function clearItemDetailsForm() {
+
+
+    $('#select_item_id')[0].selectedIndex = 0;
+    // $('#select_item_id').val('');
+    $('#item_desc').val('');
+    $('#qty_on_hand').val(''); /*issue*/
+    $('#unit_price').val('');
+    $('#qty_on_hand_select').val(''); /* issue*/
+
+
+
+}
+
+
+function formValidationItemDetails() {
+
+
+    console.log(` Ths select item Id val --> :${$('#select_item_id').val()}`);
+
+    let flag = true;
+
+    if ($('#select_item_id').children('option').length === 0) {
+        flag = false;
+        alert('The select element is empty.');
+
+    } else if ($('#select_item_id').val() === "---- Select Item ID ---") {
+
+        flag = false;
+        alert('Pls select a valid Item.');
+
+    } else if ($('#item_desc').val().trim() === '') {
+
+        flag = false;
+        alert('The Description field is empty.');
+
+    } else if ($('#unit_price').val().trim() === '') {
+
+        flag = false;
+        alert('The unit price field is empty.');
+
+    } else if ( $('#qty_on_hand_select').val().trim() === '') {
+        flag = false;
+        alert('The Qty field is empty.');
+    }
+
+    return flag;
+
+}
