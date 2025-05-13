@@ -146,6 +146,7 @@ function loadItemIds() {
 
 function generateNextOrderId() {
 
+    console.log("inside next order id");
 
     if (order_db.length === 0) {
         $('#order-id').val("O-001");
@@ -153,11 +154,17 @@ function generateNextOrderId() {
 
         let lastOrder /*lastCustomer*/ = order_db[order_db.length-1];
 
+        console.log(`inside next order id --> ${lastOrder.orderId}`);
+
+
         let currentorderid = lastOrder.orderId; /*++index;*/ /* customer_db[customer_db.length-1].custid */   /*$('#cust_id').val();*/
         let substring = currentorderid.slice(2);
         let nextdigit = parseInt(substring) + 1;
         let nextid = "O-" + nextdigit.toString().padStart(3, '0');
-        $('#order_id').val(nextid);
+
+        console.log(`inside next order id --> ${nextid}`);
+
+        $('#order-id').val(nextid);
     }
 
 
@@ -366,5 +373,80 @@ function formValidationItemDetails() {
     }
 
     return flag;
+
+}
+
+
+
+
+
+$('#save_order').on('click', function () {
+
+
+    // let orderDetArray = [];
+
+    cartArray.forEach(function (cartItem) {
+
+        let orderId = cartItem.orderId;
+        let date = $('#order-date').val();
+        let custId = $('#customer-id-select').val();
+        let itemId = cartItem.itemId;
+        let itemDesc = cartItem.itemName;
+        let qty = cartItem.qty;
+        let price = cartItem.price;
+
+        let orderDetails = new OrderModel(orderId, date, custId, itemId, itemDesc, qty, price);
+
+        order_db.push(orderDetails)
+
+    });
+
+
+
+    loadOrderDetailsTable();
+
+
+
+})
+
+
+
+
+function loadOrderDetailsTable() {
+
+    $('#order-tbody').empty();
+    order_db.forEach(function (order) {
+
+        let data = `<tr>
+                            <td>${order.orderId}</td>
+                            <td>${order.orderDate}</td>
+                            <td>${order.custId}</td>
+                            <td>${order.itemId}</td>
+                            <td>${order.itemDesc}</td>
+                            <td>${order.qty}</td>
+                            <td>${order.total}</td>
+                        </tr>>`
+
+
+        $('#order-tbody').append(data);
+
+    });
+
+
+    cartArray = [];
+
+    $('#order_cart_tbody').empty();
+    generateNextOrderId();
+    $('#customer-id-select').val('');
+
+    $('#total').val('');
+
+    alert("Order saved Successfully !!");
+    // $('#select-item-form').fadeOut(0);
+
+
+
+
+
 
 }
