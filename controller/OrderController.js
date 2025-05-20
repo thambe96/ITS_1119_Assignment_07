@@ -61,7 +61,6 @@ function getDate() {
 
 
 
-
 /* Here this listener is listening to the CustomerEventListener -->> customDbUpdated */
 
 window.addEventListener('customerDbUpdated', (event) => {
@@ -404,6 +403,11 @@ $('#save_order').on('click', function () {
 
 
     loadOrderDetailsTable();
+
+    // crating a custom even to update the item table.
+
+    let event = new CustomEvent('itemTableUpdate', {detail: item_db});
+    window.dispatchEvent(event);
 
 
 

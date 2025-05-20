@@ -78,6 +78,54 @@ $('#save_customer').on('click', function (){
     let custsalary = $('#cust_salary').val();
     let custaddress = $('#cust_address').val();
 
+
+
+
+    // Validating user inputs for customer
+
+    const addressPattern = /^[A-Za-z]{3,15}$/; // Only letters, length 3-15
+    const usernamePattern = /^[A-Za-z\s]+$/; // Letters and spaces only
+    const salaryPattern = /^\d+(\.\d+)?$/;
+
+
+    if (!usernamePattern.test(custname)) {
+
+        Swal.fire({
+            title: "Username?",
+            text: "Wrong format for a username?",
+            icon: "question"
+        });
+
+        return;
+
+    }
+
+
+    if (!addressPattern.test(custaddress)) {
+        Swal.fire({
+            title: "Address?",
+            text: "Wrong format for a address?",
+            icon: "question"
+        });
+
+        return;
+    }
+
+    if (!salaryPattern.test(custsalary)) {
+        Swal.fire({
+            title: "Salary?",
+            text: "Wrong format for the salary?",
+            icon: "question"
+        });
+
+        return;
+    }
+
+
+
+
+
+
     let customer_data = new CustomerModel(custid, custname, custsalary, custaddress);
     customer_db.push(customer_data);
 
@@ -199,15 +247,63 @@ $('#update_customer_btn_search').on('click', function () {
     let address = $('#cust_address_search').val();
 
 
-/*
-
-    customer_db[custFoundIndex].customerId(id);
-    customer_db[custFoundIndex].customerName(name);
-    customer_db[custFoundIndex].custSalary(salary);
-    customer_db[custFoundIndex].custAddress(address);
+    // Validation user inputs for customer
 
 
-*/
+    const addressPattern = /^[A-Za-z]{3,15}$/; // Only letters, length 3-15
+    const usernamePattern = /^[A-Za-z\s]+$/; // Letters and spaces only
+    const salaryPattern = /^\d+(\.\d+)?$/;
+
+
+    if (!usernamePattern.test(custname)) {
+
+        Swal.fire({
+            title: "Username?",
+            text: "Wrong format for a username?",
+            icon: "question"
+        });
+
+        return;
+
+    }
+
+
+    if (!addressPattern.test(custaddress)) {
+        Swal.fire({
+            title: "Address?",
+            text: "Wrong format for a address?",
+            icon: "question"
+        });
+
+        return;
+    }
+
+    if (!salaryPattern.test(custsalary)) {
+        Swal.fire({
+            title: "Salary?",
+            text: "Wrong format for the salary?",
+            icon: "question"
+        });
+
+        return;
+    }
+
+
+
+
+
+
+
+
+    /*
+
+        customer_db[custFoundIndex].customerId(id);
+        customer_db[custFoundIndex].customerName(name);
+        customer_db[custFoundIndex].custSalary(salary);
+        customer_db[custFoundIndex].custAddress(address);
+
+
+    */
 
 
     // check if the customer data was updated

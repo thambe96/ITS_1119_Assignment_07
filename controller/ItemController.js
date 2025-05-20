@@ -84,6 +84,58 @@ $('#save_item').on('click', function (){
     let price = $('#item_price').val();
     let quantiy = $('#item_qty').val();
 
+
+
+    // Validating user inputs for item
+
+    const itemNamePattern = /^[A-Za-z0-9\s\-']+$/;
+    const itemQuantityPattern = /^(100|[1-9][0-9]?|[1-9])$/;
+    const itemPricePattern = /^(?:0|[1-9]\d{0,4})(\.\d+)?$/;
+
+
+
+    if (!itemNamePattern.test(itemname)) {
+        Swal.fire({
+            title: "Item Name?",
+            text: "Wrong format for a item-name?",
+            icon: "question"
+        });
+        return;
+    }
+
+    if (!itemPricePattern.test(price)) {
+        Swal.fire({
+            title: "Price?",
+            text: "Wrong format for a item-price?",
+            icon: "question"
+        });
+        return;
+    }
+
+    if (!itemQuantityPattern.test(quantiy)) {
+        Swal.fire({
+            title: "Qty?",
+            text: "Wrong Qty?",
+            icon: "question"
+        });
+        return;
+    }
+
+    if (price <= 1) {
+
+        Swal.fire({
+            title: "Price?",
+            text: "price can not be 0 or negative?",
+            icon: "question"
+        });
+        return;
+
+
+    }
+
+
+
+
     let item_data = new ItemModel(itemid, itemname, price, quantiy);
     item_db.push(item_data);
 
@@ -239,6 +291,52 @@ $('#update_item_btn_search').on('click', function () {
     // check if the customer data was updated
 
 
+
+
+    //validating user inputs for item
+
+
+    const itemNamePattern = /^[A-Za-z0-9\s\-']+$/;
+    const itemQuantityPattern = /^(100|[1-9][0-9]?|[1-9])$/;
+    const itemPricePattern = /^\d+(\.\d+)?$/;
+
+
+
+    if (!itemNamePattern.test(itemname)) {
+        Swal.fire({
+            title: "Item Name?",
+            text: "Wrong format for a item-name?",
+            icon: "question"
+        });
+        return;
+    }
+
+    if (!itemPricePattern.test(price)) {
+        Swal.fire({
+            title: "Price?",
+            text: "Wrong format for a item-price?",
+            icon: "question"
+        });
+        return;
+    }
+
+    if (!itemQuantityPattern.test(quantiy)) {
+        Swal.fire({
+            title: "Qty?",
+            text: "Wrong format for a item-quantity?",
+            icon: "question"
+        });
+        return;
+    }
+
+
+
+
+
+
+
+
+
     let updateFlag = true
 
     if (item_db[itemFoundIndex].itemname === name && item_db[itemFoundIndex].price === price && item_db[itemFoundIndex].quantity == quantity) {
@@ -366,7 +464,9 @@ function findItem() {
 }
 
 
-
-
+// Creating an eventListener to itemTableUpdate even so that the item table can be updated
+window.addEventListener('itemTableUpdate', (event) => {
+    loadItems();
+})
 
 
