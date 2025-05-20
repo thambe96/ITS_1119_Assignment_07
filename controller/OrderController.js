@@ -39,13 +39,21 @@ initialize();
 
 function getDate() {
 
+    /*
     let currentDate = new Date();
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth();
     let day = currentDate.getDay();
 
+    */
 
-    let date = `${year}/${month}/${day}`
+
+
+    // let date = `${year}/${month}/${day}`
+
+
+    let date = new Date(Date.now()).toLocaleDateString();
+
     return date;
 }
 
@@ -325,6 +333,12 @@ function calculateTotal() {
     return total;
 }
 
+
+
+
+
+
+
 function clearItemDetailsForm() {
 
 
@@ -399,6 +413,35 @@ $('#save_order').on('click', function () {
         order_db.push(orderDetails)
 
     });
+
+
+    let cashOnhand = parseInt($('#cash').val());
+
+
+    if (cashOnhand < parseInt($('#total').val())) {
+        Swal.fire({
+            title: "Insufficient",
+            text: "Insufficient credits?",
+            icon: "question"
+        });
+        return;
+    }
+
+    let balance = cashOnhand - parseInt($('#total').val());
+
+    let isDiscountEmpty = false;
+    if ($('#discount').val() === '') {
+        isDiscountEmpty = true;
+    }
+
+    if (!isDiscountEmpty) {
+        let discount = parseFloat($('#discount').val());
+        balance = balance + discount;
+    }
+
+
+    $('#balance').val(balance);
+
 
 
 
