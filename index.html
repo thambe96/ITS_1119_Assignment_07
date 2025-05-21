@@ -868,17 +868,73 @@
 <script>
 
 
-    $("#customer").css("display", "none");
-    $("#item").css("display", "none");
-    $("#orders").css("display", "none");
+    let sectionId = sessionStorage.getItem('secId');
+
+    switch (sectionId) {
+
+        case "#home" : {
+                            $("#home").css("display", "block");
+                            $("#customer").css("display", "none");
+                            $("#item").css("display", "none");
+                            $("#orders").css("display", "none");
+
+
+        } break;
+        case "#customer" : {
+
+            $("#customer").css("display", "block");
+            $("#home").css("display", "none");
+            $("#item").css("display", "none");
+            $("#orders").css("display", "none");
+
+
+        } break;
+        case "#item" : {
+
+            $("#item").css("display", "block");
+            $("#customer").css("display", "none");
+            $("#home").css("display", "none");
+            $("#orders").css("display", "none");
+
+
+
+        } break;
+        case "#orders" : {
+
+            $("#orders").css("display", "block");
+            $("#customer").css("display", "none");
+            $("#item").css("display", "none");
+            $("#home").css("display", "none");
+
+
+        } break;
+
+        default : {
+
+
+            $("#customer").css("display", "none");
+            $("#item").css("display", "none");
+            $("#orders").css("display", "none");
+
+
+        }
+    }
+
+
+
+
 
 
     $("#nav-home").on('click', function () {
 
         $("#customer").css("display", "none");
-        $("#items").css("display", "none");
+        $("#item").css("display", "none");
         $("#orders").css("display", "none");
         $("#home").css("display", "block");
+
+        sessionStorage.setItem('secId', '#home');
+
+
 
     });
 
@@ -888,6 +944,8 @@
         $("#item").css("display", "none");
         $("#orders").css("display", "none");
         $("#home").css("display", "none");
+
+        sessionStorage.setItem('secId', '#customer');
 
 
     });
@@ -899,6 +957,10 @@
         $("#orders").css("display", "none");
         $("#home").css("display", "none");
 
+
+        sessionStorage.setItem('secId', '#item');
+
+
     });
 
     $("#nav-orders").on('click', function () {
@@ -908,8 +970,11 @@
         $("#orders").css("display", "block");
         $("#home").css("display", "none");
 
-    });
 
+        sessionStorage.setItem('secId', '#orders');
+
+
+    });
 
 
 
